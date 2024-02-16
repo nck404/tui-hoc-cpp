@@ -1,57 +1,34 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
+int tam(int arr[], int n, int k) {
+    int tam = 0;
+    sort(arr, arr + n);
+
+    for (int i = 0; i < n; ++i) {
+        int t = k - arr[i];
+
+        int l = lower_bound(arr + i + 1, arr + n, t) - arr;
+        int r = upper_bound(arr + i + 1, arr + n, t) - arr;
+
+        tam += r - l;
+    }
+
+    return tam;
+}
+
 int main() {
-    int n;
-    cin >> n;
+    int n, k;
+    cin >> n >> k;
 
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= i; j++) {
-            cout << "*";
-        }
-        cout << endl;
+    int arr[n];
+
+    for (int i = 0; i < n; ++i) {
+        cin >> arr[i];
     }
 
-    cout << endl;
-    for (int i = n; i >= 1; i--) {
-        for (int j = 1; j <= i; j++) {
-            cout << "*";
-        }
-        cout << endl;
-    }
+    cout << tam(arr, n, k) << endl;
 
-
-    cout << endl;
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= n-i; j++) {
-            cout << " ";
-        }
-        for (int j = 1; j <= i; j++) {
-            cout << "*";
-        }
-        cout << endl;
-    }
-    cout << endl;
-
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= i-1; j++) {
-            cout << " ";
-        }
-        for (int j = 1; j <= n-i+1; j++) {
-            cout << "*";
-        }
-        cout << endl;
-    }
-    cout << endl;
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= i; j++) {
-            if (j == 1 || j == i || i == n) {
-                cout << "*";
-            } else {
-                cout << " ";
-            }
-        }
-        cout << endl;
-    }
     return 0;
 }

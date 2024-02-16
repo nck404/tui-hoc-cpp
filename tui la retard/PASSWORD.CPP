@@ -14,7 +14,11 @@ int main() {
 
     ifstream infile("PASSWORD.INP");
       int N = 1e7;
-      bool check[N + 1] = {true};
+      bool check[N + 1];
+      for (int i = 2; i <= N; i++) {
+        check[i] = true;
+      }
+
       for (int i = 2; i <= N; i++) {
         if (check[i] == true) {
           for (int j = 2 * i; j <= N; j += i) {
@@ -22,6 +26,8 @@ int main() {
           }
         }
       }
+
+
     long long l, r;
     infile >> l >> r;
     infile.close();

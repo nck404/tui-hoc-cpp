@@ -1,38 +1,48 @@
+uses crt;
+
 var
-  a1,a2,b1,b2,newtu1,newtu2,mauchung,sumtu:Integer;
-function gcd(a, b: Integer): Integer;
-var temp: Integer;
+  st, a: string;
+  i, j, dem: integer;
+  ktra: boolean;
+function dems(s: string; c: char): integer;
+var
+  i, count: integer;
 begin
-  while b <> 0 do
+  count := 0;
+  for i := 1 to length(s) do
+    if s[i] = c then
+      count := count + 1;
+  dems := count;
+end;
+
+
+
+
+begin
+  clrscr;
+  write('Nhap xau: ');
+  readln(st);
+  a := '';
+
+  for i := 1 to length(st) do
   begin
-    temp := b;
-    b := a mod b;
-    a := temp;
+    ktra := true;
+
+    for j := 1 to i - 1 do
+      if st[i] = st[j] then
+        ktra := false;
+
+    if ktra then
+    begin
+      dem := dems(st, st[i]);
+
+      while dem > 1 do
+        dem := dem - 1;
+
+      a := a + st[i];
+    end;
   end;
-  gcd := a;
-end;
-function lcm(a, b: Integer): Integer;
-begin
-  lcm := (a * b) div gcd(a, b);
-end;
-procedure toi_gian_ps(var tu, mau: Integer);
-var
-  mauchung: Integer;
-begin
-  mauchung := gcd(tu, mau);
-  tu := tu div mauchung;
-  mau := mau div mauchung;
-end;
-begin
-  Readln(a1,a2);
-  Readln(b1,b2);
-  mauchung := lcm(a2, b2);
-  Writeln(mauchung);
-  newtu1 := a1 * (mauchung div a2);
-  newtu2 := b1 * (mauchung div b2);
-  Write(newtu1,'/',mauchung,' ');
-  Writeln(newtu2,'/',mauchung);
-  sumtu := newtu1 + newtu2;
-  toi_gian_ps(sumtu,mauchung);
-  Write(sumtu,'/',mauchung);
+
+  writeln('> : ', a);
+  readln;
 end.
