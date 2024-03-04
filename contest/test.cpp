@@ -1,8 +1,17 @@
 #include <iostream>
-#include <bits/stdc++.h>
-#define ll long long;
+#include <string>
+#include <algorithm>
+using namespace std;
+
 int main() {
-	ll n;
-	cin >> n;
-	
-} 
+  string S;
+  int arr[256] = {0};
+  int i;
+  getline(cin,S);
+  for (int i = 0; i < ; ++i)
+  {
+    /* code */
+  }
+
+  return 0;
+}

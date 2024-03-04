@@ -1,25 +1,26 @@
 #include <iostream>
 #include <fstream>
-#include <math.h>
-#include <set>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
-
-long long max_n = 10e9 + 7;
-
 int main() {
-    ios_base::sync_with_stdio(false);cin.tie(nullptr); cout.tie(nullptr);
-    ifstream cin("MARKET.INP");
-    ofstream cout("MARKET.OUT");
-    long long n,k;
-    cin >> n >> k; 
-    long long w[n],v[n];
-      set<int> sp;
-    for (int i = 0; i < n; ++i) 
-    {
-        cin >> w[i] >> v[i];
-    }
+    ifstream fin("MARKET.INP");
+    ofstream fout("MARKET.OUT");
+    int n, M;
+    fin >> n >> M;
+    vector<int> W(n+1), V(n+1);
+    for (int i = 1; i <= n; ++i) fin >> W[i] >> V[i];
+    vector<vector<int>> dp(n+1, vector<int>(M+1, 0));
+    for (int i = 1; i <= n; ++i) 
+        for (int j = 1; j <= M; ++j) {
+            if (W[i] <= j) dp[i][j] = max(dp[i-1][j], dp[i-1][j - W[i]] + V[i]);
+            else  dp[i][j] = dp[i-1][j];
+        }
     
-    cout << sp.size() << endl;
+    int p = dp[n][M];
+    if (p == 0) fout << -1 << endl; else fout << p << endl;
+    
+
     return 0;
 }
